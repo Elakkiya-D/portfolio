@@ -1,0 +1,63 @@
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.animate-on-scroll.animate-fadeInUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.animate-fadeInLeft {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-on-scroll.animate-fadeInRight {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-on-scroll.animate-scaleIn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.animate-on-scroll.animate-rotateIn {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* Delay classes */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+.delay-600 { transition-delay: 0.6s; }
+.delay-700 { transition-delay: 0.7s; }
+.delay-800 { transition-delay: 0.8s; }
+
+/* Initial states for different animations */
+.animate-on-scroll.animate-fadeInLeft {
+  transform: translateX(-50px);
+}
+
+.animate-on-scroll.animate-fadeInRight {
+  transform: translateX(50px);
+}
+
+.animate-on-scroll.animate-scaleIn {
+  transform: scale(0.8);
+}
+
+.animate-on-scroll.animate-rotateIn {
+  transform: rotate(-10deg);
+}
+
+/* Hover effects for animated elements */
+.animate-on-scroll:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
