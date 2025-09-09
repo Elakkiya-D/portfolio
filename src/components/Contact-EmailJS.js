@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaCode, FaGlobe } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 import './Contact.css';
 
 const Contact = () => {
@@ -12,6 +13,11 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -26,27 +32,26 @@ const Contact = () => {
     setSubmitStatus('');
     
     try {
-      const response = await fetch('https://formspree.io/f/movnlkal', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
+      const result = await emailjs.send(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          _replyto: 'delakkiya2@gmail.com'
-        }),
-      });
+          to_email: 'delakkiya2@gmail.com'
+        }
+      );
 
-      if (response.ok) {
+      if (result.status === 200) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         setSubmitStatus('error');
       }
     } catch (error) {
+      console.error('EmailJS Error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -107,12 +112,12 @@ const Contact = () => {
         
         <div className="contact-content">
           <div className="contact-info">
-                              <h3>Professional Collaboration</h3>
-                   <p>
-                     I'm actively seeking opportunities to contribute to innovative projects and 
-                     collaborate with forward-thinking teams. Whether you have a project requirement, 
-                     partnership opportunity, or would like to discuss technology trends, I'd welcome the conversation.
-                   </p>
+            <h3>Professional Collaboration</h3>
+            <p>
+              I'm actively seeking opportunities to contribute to innovative projects and 
+              collaborate with forward-thinking teams. Whether you have a project requirement, 
+              partnership opportunity, or would like to discuss technology trends, I'd welcome the conversation.
+            </p>
             
             <div className="contact-details">
               {contactInfo.map((info, index) => (

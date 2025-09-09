@@ -14,7 +14,7 @@ const Projects = () => {
       category: "fullstack",
       image: "food-ordering",
       github: "https://github.com/Elakkiya-D/Food-Crave",
-      live: "https://food-ordering-demo.com"
+     
     },
     {
       id: 2,
